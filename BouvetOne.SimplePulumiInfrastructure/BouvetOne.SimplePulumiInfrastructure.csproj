@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Pulumi.AzureNative" Version="0.*" />
+    <PackageReference Include="Pulumi.Azure" Version="3.52.0" />
+    <PackageReference Include="Pulumi.AzureNative" Version="0.7.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 
 </Project>
