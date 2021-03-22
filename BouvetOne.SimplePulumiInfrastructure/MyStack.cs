@@ -5,6 +5,7 @@ using Pulumi.Azure.AppService.Inputs;
 using Pulumi.Azure.Core;
 using Pulumi.Azure.KeyVault;
 using Pulumi.Azure.Storage;
+using Shared;
 
 internal class MyStack : Stack
 {
@@ -63,7 +64,7 @@ internal class MyStack : Stack
             AppSettings = new InputMap<string>()
         };
 
-        appServiceArgs.AppSettings.Add("KeyVault_VaultUri", kv.VaultUri);
+        appServiceArgs.AppSettings.Add(Names.KeyVaultUri, kv.VaultUri);
 
         var appService = new AppService("bv-fag-demo-dev-app", appServiceArgs);
 
@@ -75,9 +76,9 @@ internal class MyStack : Stack
             KeyVaultId = kv.Id,
         });
 
-        var secret = new Secret("kv-secret", new SecretArgs()
+        var secret = new Secret(Names.StorageSecret, new SecretArgs()
         {
-            Name = "kv-secret",
+            Name = Names.StorageSecret,
             KeyVaultId = kv.Id,
             Value = storageAccount.PrimaryConnectionString,
         }, new CustomResourceOptions() { DependsOn = new List<Resource>() { self } });

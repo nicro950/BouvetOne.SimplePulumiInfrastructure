@@ -1,0 +1,38 @@
+﻿@page "/"
+@inject BlobClient client
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+@if (contains == null)
+{
+    <div>Loading</div>
+}
+else if (contains.Length == 0)
+{
+<div>No containers found</div>
+}
+else
+{
+    <div>Found contains:</div>
+<ul>
+    @foreach(var v in contains)
+    {
+    <li>@v</li>
+    }
+</ul>
+}
+
+@code {
+    int i = 0;
+    string[] contains = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        contains = await client.ListContainers();
+
+    }
+}
