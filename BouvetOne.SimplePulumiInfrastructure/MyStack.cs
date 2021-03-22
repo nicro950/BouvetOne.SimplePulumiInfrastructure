@@ -38,7 +38,7 @@ internal class MyStack : Stack
         var self = new AccessPolicy("self", new AccessPolicyArgs()
         {
             ObjectId = current.Apply(x => x.ObjectId),
-            SecretPermissions = new InputList<string>() { "get", "set", "list", "delete" },
+            SecretPermissions = new InputList<string>() { "get", "set", "list", "delete", "purge" },
             TenantId = kv.TenantId,
             KeyVaultId = kv.Id,
         });
